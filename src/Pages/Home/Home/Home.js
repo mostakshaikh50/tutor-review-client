@@ -10,7 +10,7 @@ const Home = () => {
             <Banner></Banner>
             <Services></Services>
             <About></About>
-             <TrustedOnTutor></TrustedOnTutor>
+            <TrustedOnTutor></TrustedOnTutor>
         </div>
     );
 };

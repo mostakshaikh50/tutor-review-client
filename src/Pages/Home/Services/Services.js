@@ -12,7 +12,7 @@ const Services = () => {
     return (
         <div>
             <div className='text-center mb-4'>
-                <p className="text-6xl font-bold text-yellow-600">Services List</p>
+                <p className="text-6xl font-bold text-yellow-600">Services</p>
             </div>
             <div className='card-actions justify-end'>
                 <Link to="/allservices/">
