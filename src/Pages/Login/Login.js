@@ -22,9 +22,9 @@ const Login = () => {
         .then(result =>{
             const user = result.user;
             console.log(user);
-            navigate('/');
+            navigate(from, {replace: true});
         })
-        .catch(error => console.error);
+        .catch(error => console.log(error));
     }
 
     const handleLogin = event =>{
@@ -37,37 +37,37 @@ const Login = () => {
         .then(result => {
             const user = result.user;
             console.log(user);
-            navigate('/');
+            navigate(from, {replace: true});
         })
         .then(error => console.log(error));
 
-        // loginUser(email, password)
-        // .then(result => {
-        //     const user = result.user;
-        //     console.log(user);
+        loginUser(email, password)
+        .then(result => {
+            const user = result.user;
+            console.log(user);
             
-        //     const currentUser ={
-        //         email: user.email
-        //     }
-        //     console.log(currentUser);
+            const currentUser ={
+                email: user.email
+            }
+            console.log(currentUser);
 
-        //     //get jwt token
-        //     fetch('http://localhost:5000/jwt',{
-        //         method: 'POST',
-        //         headers: {
-        //             'content-type': 'application/json'
-        //         },
-        //         body: JSON.stringify(currentUser)
-        //     })
-        //     .then(res => res.json())
-        //     .then(data => {
-        //         console.log(data);
-        //         localStorage.setItem('token', data.token);
-        //         navigate(from, {replace: true});
-        //     })
+            //get jwt token
+            fetch('http://localhost:5000/jwt',{
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(currentUser)
+            })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                localStorage.setItem('token', data.token);
+                navigate(from, {replace: true});
+            })
            
-        // })
-        // .catch(err => console.error(err))
+        })
+        .catch(err => console.error(err))
     }
     return (
         <div className="grid place-items-center my-20">

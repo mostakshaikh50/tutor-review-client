@@ -12,7 +12,11 @@ const Review = () => {
    
 
     useEffect(() => {
-        fetch(`http://localhost:5000/reviews?email=${user?.email}`)
+        fetch(`http://localhost:5000/reviews?email=${user?.email}`,{
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+        })
             .then(res => res.json())
             .then(data => setReviews(data))
     }, [user?.email])
@@ -45,7 +49,8 @@ const Review = () => {
                 <table className="table w-full">
                    
                     <thead>
-                        <tr>                            
+                        <tr>
+                            <th></th>                            
                             <th>Image</th>
                             <th>Name</th>
                             <th>Email</th>
