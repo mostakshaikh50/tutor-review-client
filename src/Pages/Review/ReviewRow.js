@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const ReviewRow = ({review, handleDelete}) => {
     const {_id, ServiceName, reviewerName, email, reviewerImage, service, message} = review
@@ -25,6 +26,9 @@ const ReviewRow = ({review, handleDelete}) => {
             </td>
             <td>{email}</td>
             <td>{message}</td>
+            <Link to={`/update/${_id}`}>
+                <button>Update</button>
+            </Link>
         </tr>
     );
 };
