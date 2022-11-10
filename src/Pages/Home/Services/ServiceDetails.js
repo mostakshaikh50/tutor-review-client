@@ -9,7 +9,7 @@ const ServiceDetails = () => {
     const serviceDetailsData = useLoaderData();
     const {user} = useContext(AuthContext);
     const {_id, title, price, description, img, facility } = serviceDetailsData;
-    console.log(user);
+    
     const facilityName1 = facility[0].name;
     const facilityDetails1 = facility[0].details.split('_');
     const facilityName2 = facility[1].name;
@@ -109,19 +109,7 @@ const ServiceDetails = () => {
             </div>
 
                 {reviewSection}
-            {/* <div className="card w-full bg-black text-primary-content mt-5">                
-                <h1 className='text-4xl text-center text-yellow-400 font-extrabold'>Review Section</h1>
-                <form onSubmit={handleService}>
-                    <div className='grid grid-cols-1 lg:grid-cols-2 gap-4 mb-5 mt-5'>
-                       <input name="name" type="text" placeholder="Your Name" className="input input-ghost input-bordered w-full" />
-                       <input name="email" type="text" defaultValue={user?.email} placeholder="Your Email" className="input input-ghost input-bordered w-full" readOnly />
-                       <input name="image" type="text" placeholder="Image Link" className="input input-ghost input-bordered w-full" required />
-                       <textarea name="message" className="textarea input-ghost textarea-warning" placeholder="Your Review"></textarea>
-                    </div>                    
-                    <button className="btn btn-success mb-4">Submit your Review</button>                    
-                </form>                
-            </div>
-            <Review></Review> */}
+            
         </div>
     );
 };

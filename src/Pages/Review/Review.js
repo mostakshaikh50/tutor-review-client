@@ -14,15 +14,36 @@ const Review = () => {
             .then(res => res.json())
             .then(data => setReviews(data))
     }, [user?.email])
+
+    const handleDelete = id =>{
+        const proceed = window.confirm('Are you sure, you want to delete this review?');
+        if(proceed){
+            fetch(`http://localhost:5000/reviews/${id}`,{
+                method: 'DELETE'
+            })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if(data.deletedCount > 0){
+                    alert('deleted successfully!');
+                    const restReview = reviews.filter(revs => revs._id !== id );
+                    setReviews(restReview);
+                }
+            })
+        }
+    }
+
     return (
         <div>
             <h2>reviews: {reviews.length}</h2>
-            <div className="overflow-x-auto w-full text-gray-700">
+            {
+                reviews?.length?
+                <>
+                <div className="overflow-x-auto w-full text-gray-700">
                 <table className="table w-full">
                    
                     <thead>
-                        <tr>
-                            
+                        <tr>                            
                             <th>Image</th>
                             <th>Name</th>
                             <th>Email</th>
@@ -36,6 +57,7 @@ const Review = () => {
                              reviews.map(review => <ReviewRow
                                key={reviews._id}
                                review={review}
+                               handleDelete={handleDelete}
                              ></ReviewRow>)
                         }                     
                         
@@ -44,6 +66,11 @@ const Review = () => {
 
                 </table>
             </div>
+                </>
+                :
+                <p>No Data available</p>
+            }
+            
         </div>
     );
 };
