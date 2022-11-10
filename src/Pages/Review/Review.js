@@ -6,7 +6,7 @@ import ReviewRow from './ReviewRow';
 const Review = () => {
     const [reviews, setReviews] = useState([]);
     const {user} = useContext(AuthContext);
-    console.log(reviews)
+    
    
 
     useEffect(() => {

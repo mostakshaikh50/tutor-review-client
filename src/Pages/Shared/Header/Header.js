@@ -13,10 +13,12 @@ const Header = () => {
   }
     const menuItems = <>
         <li className='font-semibold'><Link to='/'>Home</Link></li>
+        <li className='font-semibold'><Link to='/blog'>Blog</Link></li>
         {
           user?.email?
           <>
           <li className='font-semibold'><Link to='/reviews'>MyReviews</Link></li>
+          <li className='font-semibold'><Link to='/addservice'>Add Service</Link></li>
           <li className='font-semibold justify-end'>
             <button onClick={handleLogOut} className='btn-ghost'>Sign Out</button>
             </li>
