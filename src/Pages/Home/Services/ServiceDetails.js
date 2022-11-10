@@ -1,12 +1,15 @@
-import React from 'react';
-import { useLoaderData } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Link, useLoaderData } from 'react-router-dom';
 import { PhotoProvider, PhotoView } from 'react-photo-view';
 import 'react-photo-view/dist/react-photo-view.css';
+import Review from '../../Review/Review';
+import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 
 const ServiceDetails = () => {
     const serviceDetailsData = useLoaderData();
+    const {user} = useContext(AuthContext);
     const {_id, title, price, description, img, facility } = serviceDetailsData;
-
+    console.log(user);
     const facilityName1 = facility[0].name;
     const facilityDetails1 = facility[0].details.split('_');
     const facilityName2 = facility[1].name;
@@ -16,7 +19,7 @@ const ServiceDetails = () => {
         event.preventDefault();
         const form = event.target;
         const name = form.name.value;
-        const email = form.email.value;
+        const email = user?.email || 'unregistered';
         const image = form.image.value;
         const message = form.message.value;
 
@@ -40,13 +43,40 @@ const ServiceDetails = () => {
         .then(res => res.json())
         .then(data => {
             if(data.acknowledged){
-                console.log(data);
+                //console.log(data);
                 alert('Review submitted Successfully!');
                 form.reset();
             }            
         })
         .catch(err => console.error(err));
     }
+
+
+    const reviewSection = <>
+        {
+          user?.email?
+          <>
+          <div className="card w-full bg-black text-primary-content mt-5">                
+                <h1 className='text-4xl text-center text-yellow-400 font-extrabold'>Review Section</h1>
+                <form onSubmit={handleService}>
+                    <div className='grid grid-cols-1 lg:grid-cols-2 gap-4 mb-5 mt-5'>
+                       <input name="name" type="text" placeholder="Your Name" className="input input-ghost input-bordered w-full" />
+                       <input name="email" type="text" defaultValue={user?.email} placeholder="Your Email" className="input input-ghost input-bordered w-full" readOnly />
+                       <input name="image" type="text" placeholder="Image Link" className="input input-ghost input-bordered w-full" required />
+                       <textarea name="message" className="textarea input-ghost textarea-warning" placeholder="Your Review"></textarea>
+                    </div>                    
+                    <button className="btn btn-success mb-4">Submit your Review</button>                    
+                </form>                
+            </div>
+            <Review></Review>
+          </>
+          :
+          <div className="card w-full h-4/5 bg-black text-primary-content mt-5">                
+                <h1 className='text-4xl text-center text-yellow-400 font-bold'>Review Section</h1>
+                <li className='font-semibold justify-center ml-60  text-2xl'>Please Login here  <Link className='text-yellow-400' to='/login'>Login</Link></li>               
+            </div>
+        }
+     </>
 
     return (
         <div>
@@ -78,19 +108,20 @@ const ServiceDetails = () => {
                 </div>
             </div>
 
-
-            <div className="card w-full bg-black text-primary-content mt-5">
+                {reviewSection}
+            {/* <div className="card w-full bg-black text-primary-content mt-5">                
                 <h1 className='text-4xl text-center text-yellow-400 font-extrabold'>Review Section</h1>
                 <form onSubmit={handleService}>
                     <div className='grid grid-cols-1 lg:grid-cols-2 gap-4 mb-5 mt-5'>
                        <input name="name" type="text" placeholder="Your Name" className="input input-ghost input-bordered w-full" />
-                       <input name="email" type="text" placeholder="Your Email" className="input input-ghost input-bordered w-full" />
-                       <input name="image" type="text" placeholder="Image Link" className="input input-ghost input-bordered w-full" />
+                       <input name="email" type="text" defaultValue={user?.email} placeholder="Your Email" className="input input-ghost input-bordered w-full" readOnly />
+                       <input name="image" type="text" placeholder="Image Link" className="input input-ghost input-bordered w-full" required />
                        <textarea name="message" className="textarea input-ghost textarea-warning" placeholder="Your Review"></textarea>
                     </div>                    
-                    <button className="btn btn-success mb-4">Submit your Review</button>
-                </form>
+                    <button className="btn btn-success mb-4">Submit your Review</button>                    
+                </form>                
             </div>
+            <Review></Review> */}
         </div>
     );
 };
