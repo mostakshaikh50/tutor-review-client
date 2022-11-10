@@ -1,8 +1,10 @@
 import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
+import useTitle from '../../Hooks/useTitle';
 
 const SignUp = () => {
+    useTitle('Sign Up');
     const {createUser} = useContext(AuthContext);
     const navigate = useNavigate();
     const handleSignUp = event =>{
@@ -11,7 +13,7 @@ const SignUp = () => {
         const email = form.email.value;
         const password = form.password.value;
         
-
+        
         createUser(email, password)
         .then(result => {
             const user = result.user;
