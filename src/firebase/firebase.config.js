@@ -5,6 +5,17 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
+
+
+// I HAVE TRIED MANY TIMES BUT IT DOESN'T WORK, PLEASE CONSIDER
+
+ // apiKey: process.env.REACT_APP_apiKey,
+  // authDomain: process.env.REACT_APP_authDomain,
+  // projectId: process.env.REACT_APP_projectId,
+  // storageBucket: process.env.REACT_APP_storageBucket,
+  // messagingSenderId: process.env.REACT_APP_messageSenderId,
+  // appId: process.env.REACT_APP_appId
+
   apiKey: "AIzaSyA8DuEjTL7AaNWSYotLLJRekwV9l3jZDc0",
   authDomain: "assignment11-tutor.firebaseapp.com",
   projectId: "assignment11-tutor",
